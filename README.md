@@ -23,8 +23,9 @@ Avoid getting slapped.
 
 ## Credits
 
-Martin Kronberg
-Sasmita Patra
+-Martin Kronberg
+
+-Sasmita Patra
 
 
 ## License
