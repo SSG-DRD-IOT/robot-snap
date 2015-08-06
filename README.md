@@ -4,9 +4,9 @@ TODO: Write a project description
 
 ## Assembly
 
-## Installation
-
 Assembly instructions to come.
+
+## Installation
 
 Node.js:
 No installation or dependencies needed...yet 
