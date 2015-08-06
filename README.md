@@ -1,6 +1,6 @@
 # Robot Slap
 
-Robotic slapping game using Intel Edison and showcasing the use of four different programming languages to achieve the same result: Node.js, C++, Python, and Aruino (Java)
+Robotic slapping game using Intel Edison and showcasing the use of four different programming languages to achieve the same result: Node.js, C++, Python, and Arduino (Java)
 
 ## Assembly
 
