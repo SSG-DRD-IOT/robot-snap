@@ -1,6 +1,6 @@
 # Robot Slap
 
-TODO: Write a project description
+Robotic slapping game using Intel Edison and showcasing the use of four different programming languages to achieve the same result: Node.js, C++, Python, and Aruino (Java)
 
 ## Assembly
 
@@ -14,8 +14,11 @@ No installation or dependencies needed...yet
 ## Usage
 
 Turn on.
+
 Hit start button to begin game.
+
 Put finger on touch pad.
+
 Avoid getting slapped.
 
 ## Credits
