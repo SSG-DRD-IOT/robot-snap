@@ -4,6 +4,7 @@ Robot-Snap
 Robotic slapping game using Intel Edison and showcasing the use of different programming languages to achieve the same result.
 
 Languages supported currently: Node.js and C++.
+
 Languages supported in near future: Python and Arduino
 
 Game Description
