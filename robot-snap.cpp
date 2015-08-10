@@ -1,4 +1,3 @@
-
 /*
  *  Author: Sisinty Sasmita Patra <sisinty.s.patra@intel.com>
  *  Robot-snap game
@@ -128,6 +127,7 @@ void init()
 	greenled->off();
 	redled->off();
 	bar->setBarLevel(0);
+	sound->stopSound();
 
 	srand(time(0));
 }
@@ -149,7 +149,7 @@ int main()
 	// numChances for each game
 	while(count < numChances)
 	{
-		if(touch->isPressed())
+		if(touch->isPressed() == 1)
 		{
 			// randomly either bluffs or slaps
 			switch(rand()%2)
@@ -159,8 +159,6 @@ int main()
 			}
 			cout << "# of chances used: " << count << endl;
 
-			// Sleep before starting next chance
-			sleep(2);
 		}
 		else
 		{
