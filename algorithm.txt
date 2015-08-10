@@ -1,0 +1,29 @@
+Algorithm:
+==========
+
+Initialize all sensors
+
+Initialize X to 5
+Initialize D to some large steps to cover slapping
+Initialize B to small number of steps to cover bluffing
+
+Initialize count to zero
+
+* If Touch sensor is pressed
+	* Loop until count reaches X
+		* generate a random number (p) between 0 and 1
+		* if p is 0 (corresponds to slaps)
+			* Move swatter D degrees (slapping) Clockwise
+			* Move swatter D degrees (slapping) Counter Clockwise
+			* if swatter hits the user.
+				* Turn red led on and buzzer
+			* else 
+		 		* Turn green led on and light 2 more slots of Led bar.
+			* increment count
+		* else (corresponds to bluff)
+			* Move swatter B degrees clockwise
+			* Move swatter B degrees counter clockwise
+				
+
+
+
