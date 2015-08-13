@@ -51,7 +51,7 @@ upm::GroveLed* redled = new upm::GroveLed(7);
 
 upm::Buzzer* sound = new upm::Buzzer(5);
 
-//upm::Jhd1313m1 *lcd = new upm::Jhd1313m1(0, 0x3E, 0x62);
+upm::Jhd1313m1 *lcd = new upm::Jhd1313m1(0, 0x3E, 0x62);
 
 upm::MY9221* bar = new upm::MY9221(8, 9);
 
@@ -128,6 +128,9 @@ void init()
 	bar->setBarLevel(0);
 	sound->stopSound();
 
+	lcd->clear();
+	lcd->setCursor(0,0);
+
 	srand(time(0));
 }
 
@@ -145,16 +148,26 @@ int main()
 {
 	init();
 
-	while(1)
+	lcd->write("Press Button");
+
+	while (true)
 	{
-		if(button->value() == 0)
-		{
-			cout << "press button" << endl;
-			sleep(2);
-		}
-		else
+		// Break when button is pressed
+		if(button->value() != 0)
 			break;
+
+		sleep(1);
 	}
+
+	lcd->clear();
+
+	lcd->write("Total chances: 5");
+	sleep(3);
+	lcd->clear();
+	lcd->write("Place finger on");
+	lcd->setCursor(1, 0);
+	lcd->write("touch sensor");
+
 	// numChances for each game
 	while(count < numChances)
 	{
@@ -166,18 +179,23 @@ int main()
 				case 0: slap(); break;
 				case 1: bluff(); break;
 			}
-			cout << "# of chances used: " << count << endl;
 
+			lcd->clear();
+			ostringstream stream;
+			stream << "#chances left: " << numChances - count;
+			lcd->write(stream.str());
 		}
-		else
-		{
-			cout << "place your finger on touch sensor" << endl;
-			cout << "Number of remaining chances: " << numChances - count << endl;
-			sleep(2);
-		}
+
+		sleep(2);
 	}
 
-	cout << "Your score is : " << wincount << "/" << numChances << endl;
+	lcd->clear();
+	ostringstream stream;
+	stream << "Your score: " << wincount << "/" << numChances;
+	lcd->write(stream.str());
+
+	sleep(3);
+	lcd->clear();
 
 	teardown();
 
