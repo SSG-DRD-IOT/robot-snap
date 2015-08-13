@@ -9,6 +9,7 @@ Initialize B to small number of steps to cover bluffing
 
 Initialize count to zero
 
+* Loop until button is pressed 
 * If Touch sensor is pressed
 	* Loop until count reaches X
 		* generate a random number (p) between 0 and 1

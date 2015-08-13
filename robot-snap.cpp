@@ -58,7 +58,7 @@ upm::MY9221* bar = new upm::MY9221(8, 9);
 int count = 0; // counts the no. of times swatter slaps, each user gets only 5 chances
 int wincount = 0;
 
-int numChances = 5;
+int numChances = 2;
 
 int S = 675;
 int B = 256;
@@ -88,21 +88,18 @@ void slap()
 	if(touch->isPressed() == 0)
 	{
 		wincount++;
-		cout << "turning green led on" << endl;
+
 		greenled->on();
 		sleep(2);
 		// Turning off for the next chance
 		greenled->off();
 
-		cout << "lighting 2 more slots of led bar " << endl;
 		bar->setBarLevel (bar_index + 2);
 		bar_index = bar_index + 2;
 	}
 	else
 	{
-		cout << "turning red led on" << endl;
 		redled->on();
-		cout << "buzzer sounds " << endl;
 		sound->playSound(RE, 1000000);
 
 		sleep(2);
@@ -121,8 +118,12 @@ void slap()
 	count++;
 }
 
-void init()
+void reset()
 {
+	count = 0;
+	wincount = 0;
+	bar_index = 0;
+
 	greenled->off();
 	redled->off();
 	bar->setBarLevel(0);
@@ -131,7 +132,6 @@ void init()
 	lcd->clear();
 	lcd->setCursor(0,0);
 
-	srand(time(0));
 }
 
 void teardown()
@@ -146,56 +146,73 @@ void teardown()
 
 int main()
 {
-	init();
+	srand(time(NULL));
 
-	lcd->write("Press Button");
-
-	while (true)
+	while(true)
 	{
-		// Break when button is pressed
-		if(button->value() != 0)
-			break;
+		reset();
 
-		sleep(1);
-	}
+		lcd->write("Press Button");
 
-	lcd->clear();
-
-	lcd->write("Total chances: 5");
-	sleep(3);
-	lcd->clear();
-	lcd->write("Place finger on");
-	lcd->setCursor(1, 0);
-	lcd->write("touch sensor");
-
-	// numChances for each game
-	while(count < numChances)
-	{
-		if(touch->isPressed() == 1)
+		while (true)
 		{
-			// randomly either bluffs or slaps
-			switch(rand()%2)
-			{
-				case 0: slap(); break;
-				case 1: bluff(); break;
-			}
+			// Break when button is pressed
+			if(button->value() != 0)
+				break;
 
-			lcd->clear();
-			ostringstream stream;
-			stream << "#chances left: " << numChances - count;
-			lcd->write(stream.str());
+			sleep(1);
 		}
 
+		lcd->clear();
+
+		lcd->write("Total chances: 5");
+		sleep(3);
+		lcd->clear();
+		lcd->write("Place finger on");
+		lcd->setCursor(1, 0);
+		lcd->write("touch sensor");
+
+		// numChances for each game
+		while(count < numChances)
+		{
+			if(touch->isPressed() == 1)
+			{
+				// randomly either bluffs or slaps
+				switch(rand()%2)
+				{
+					case 0: slap(); break;
+					case 1: bluff(); break;
+				}
+
+				lcd->clear();
+				ostringstream stream;
+				stream << "#chances left: " << numChances - count;
+				lcd->write(stream.str());
+			}
+
+			sleep(2);
+		}
+
+		lcd->clear();
+		ostringstream stream;
+		stream << "Your score: " << wincount << "/" << numChances;
+		lcd->write(stream.str());
+
 		sleep(2);
+		lcd->clear();
+
+		if(wincount == numChances)
+			lcd->write("Hurray!!");
+		else
+		{
+			lcd->write("Better luck");
+			lcd->setCursor(1,0);
+			lcd->write("Next time");
+		}
+
+		sleep(3);
+		lcd->clear();
 	}
-
-	lcd->clear();
-	ostringstream stream;
-	stream << "Your score: " << wincount << "/" << numChances;
-	lcd->write(stream.str());
-
-	sleep(3);
-	lcd->clear();
 
 	teardown();
 
