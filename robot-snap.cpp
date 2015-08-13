@@ -67,7 +67,6 @@ int bar_index = 0;
 
 void bluff()
 {
-
 	uln200xa->setSpeed(7);
 	uln200xa->setDirection(upm::ULN200XA::DIR_CW);
 	uln200xa->stepperSteps(B);
@@ -146,6 +145,16 @@ int main()
 {
 	init();
 
+	while(1)
+	{
+		if(button->value() == 0)
+		{
+			cout << "press button" << endl;
+			sleep(2);
+		}
+		else
+			break;
+	}
 	// numChances for each game
 	while(count < numChances)
 	{
@@ -164,6 +173,7 @@ int main()
 		{
 			cout << "place your finger on touch sensor" << endl;
 			cout << "Number of remaining chances: " << numChances - count << endl;
+			sleep(2);
 		}
 	}
 
