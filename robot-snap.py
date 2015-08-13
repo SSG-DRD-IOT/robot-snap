@@ -38,7 +38,7 @@ redLed = grove.GroveLed(7)
 count = 0 	# counts the no. of times swatter slaps, each user gets only 5 chances
 wincount = 0    #counts the no. of times user wins
 
-numChances = 2; # total no. of chances user gets
+numChances = 5; # total no. of chances user gets
 
 S = 675;
 B = 256;
